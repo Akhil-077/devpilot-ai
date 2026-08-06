@@ -3,61 +3,111 @@ import {
   FileText,
   Lightbulb,
   Rocket,
+  ArrowRight,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function QuickTools() {
+  const navigate = useNavigate();
+
   const tools = [
     {
       title: "AI Chat",
-      icon: <MessageSquare size={24} />,
-      color: "bg-blue-600",
+      description: "Talk with DevPilot AI powered by Gemini.",
+      icon: <MessageSquare size={28} />,
+      gradient: "from-blue-500 to-cyan-500",
+      route: "/chat",
+      available: true,
     },
     {
       title: "Resume Analyzer",
-      icon: <FileText size={24} />,
-      color: "bg-green-600",
+      description: "Get ATS score and AI resume suggestions.",
+      icon: <FileText size={28} />,
+      gradient: "from-green-500 to-emerald-500",
+      route: "/resume",
+      available: true,
     },
     {
       title: "Roadmap Generator",
-      icon: <Lightbulb size={24} />,
-      color: "bg-yellow-500",
+      description: "Generate a personalized learning roadmap.",
+      icon: <Lightbulb size={28} />,
+      gradient: "from-yellow-500 to-orange-500",
+      route: "#",
+      available: false,
     },
     {
-      title: "Create Project",
-      icon: <Rocket size={24} />,
-      color: "bg-purple-600",
+      title: "Project Generator",
+      description: "Create complete AI-powered project ideas.",
+      icon: <Rocket size={28} />,
+      gradient: "from-purple-500 to-pink-500",
+      route: "#",
+      available: false,
     },
   ];
 
   return (
-    <div className="mt-10 bg-[#111827] border border-gray-700 rounded-2xl p-8">
+    <section className="mt-10">
 
-      <h2 className="text-2xl font-bold text-white mb-8">
-        ⚡ Quick AI Tools
-      </h2>
+      <div className="flex items-center justify-between mb-6">
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+        <h2 className="text-2xl font-bold text-white">
+          ⚡ Quick AI Tools
+        </h2>
+
+        <p className="text-gray-400 text-sm">
+          Launch your favorite AI tools
+        </p>
+
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
         {tools.map((tool, index) => (
-          <button
+          <div
             key={index}
-            className="bg-[#1F2937] rounded-xl p-6 hover:bg-[#273549] transition hover:-translate-y-1"
+            className="relative overflow-hidden rounded-2xl border border-gray-800 bg-[#111827] p-6 hover:border-blue-500 hover:-translate-y-2 transition-all duration-300 shadow-lg"
           >
+
+            {!tool.available && (
+              <span className="absolute top-4 right-4 bg-yellow-500/20 text-yellow-400 text-xs px-2 py-1 rounded-full">
+                Coming Soon
+              </span>
+            )}
+
             <div
-              className={`${tool.color} w-14 h-14 rounded-xl flex items-center justify-center text-white mx-auto mb-4`}
+              className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${tool.gradient} flex items-center justify-center text-white shadow-lg mb-5`}
             >
               {tool.icon}
             </div>
 
-            <h3 className="text-white font-semibold text-center">
+            <h3 className="text-xl font-semibold text-white mb-2">
               {tool.title}
             </h3>
-          </button>
+
+            <p className="text-gray-400 text-sm leading-6 mb-6">
+              {tool.description}
+            </p>
+
+            <button
+              disabled={!tool.available}
+              onClick={() => tool.available && navigate(tool.route)}
+              className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl font-medium transition ${
+                tool.available
+                  ? "bg-blue-600 hover:bg-blue-700 text-white"
+                  : "bg-gray-800 text-gray-500 cursor-not-allowed"
+              }`}
+            >
+              {tool.available ? "Open Tool" : "Coming Soon"}
+
+              {tool.available && <ArrowRight size={18} />}
+            </button>
+
+          </div>
         ))}
 
       </div>
 
-    </div>
+    </section>
   );
 }
 

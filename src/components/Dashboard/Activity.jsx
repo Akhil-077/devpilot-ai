@@ -3,6 +3,7 @@ import {
   MessageSquare,
   FolderPlus,
   Pencil,
+  ArrowUpRight,
 } from "lucide-react";
 
 function Activity() {
@@ -10,69 +11,93 @@ function Activity() {
     {
       icon: <Upload size={20} />,
       title: "Resume uploaded",
+      description: "Your resume was uploaded successfully.",
       time: "2 hours ago",
-      color: "bg-green-600",
+      color: "from-green-500 to-emerald-500",
     },
     {
       icon: <MessageSquare size={20} />,
       title: "AI Chat completed",
+      description: "You asked Gemini AI about React Hooks.",
       time: "4 hours ago",
-      color: "bg-blue-600",
+      color: "from-blue-500 to-cyan-500",
     },
     {
       icon: <FolderPlus size={20} />,
       title: "New project created",
+      description: "DevPilot AI project was created.",
       time: "Yesterday",
-      color: "bg-purple-600",
+      color: "from-purple-500 to-pink-500",
     },
     {
       icon: <Pencil size={20} />,
       title: "Portfolio updated",
+      description: "Your portfolio information was edited.",
       time: "2 days ago",
-      color: "bg-orange-500",
+      color: "from-orange-500 to-yellow-500",
     },
   ];
 
   return (
-    <div className="mt-10 bg-[#111827] border border-gray-700 rounded-2xl p-8">
+    <section className="mt-10 mb-10">
+      <div className="flex items-center justify-between mb-6">
 
-      <h2 className="text-2xl font-bold text-white mb-6">
-        Recent Activity
-      </h2>
+        <h2 className="text-2xl font-bold text-white">
+          Recent Activity
+        </h2>
+
+        <button className="text-blue-400 hover:text-blue-300 text-sm">
+          View All
+        </button>
+
+      </div>
 
       <div className="space-y-5">
 
         {activities.map((item, index) => (
           <div
             key={index}
-            className="flex items-center justify-between bg-[#1F2937] rounded-xl p-4 hover:bg-[#273549] transition"
+            className="group flex items-center justify-between rounded-2xl border border-gray-800 bg-[#111827] p-5 hover:border-blue-500 hover:-translate-y-1 transition-all duration-300 shadow-lg"
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-5">
 
               <div
-                className={`${item.color} w-11 h-11 rounded-xl flex items-center justify-center text-white`}
+                className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white shadow-lg`}
               >
                 {item.icon}
               </div>
 
               <div>
-                <h3 className="text-white font-medium">
+
+                <h3 className="text-lg font-semibold text-white">
                   {item.title}
                 </h3>
 
-                <p className="text-sm text-gray-400">
-                  {item.time}
+                <p className="text-sm text-gray-400 mt-1">
+                  {item.description}
                 </p>
+
+                <span className="text-xs text-gray-500 mt-2 block">
+                  {item.time}
+                </span>
+
               </div>
 
             </div>
+
+            <button className="opacity-0 group-hover:opacity-100 transition flex items-center gap-2 text-blue-400 hover:text-blue-300">
+
+              Details
+
+              <ArrowUpRight size={18} />
+
+            </button>
 
           </div>
         ))}
 
       </div>
-
-    </div>
+    </section>
   );
 }
 

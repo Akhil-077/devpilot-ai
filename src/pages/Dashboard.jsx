@@ -19,32 +19,41 @@ function Dashboard() {
         <Header />
 
         {/* Dashboard Content */}
-        <main className="p-8">
+        <main className="flex-1 overflow-y-auto">
 
-          {/* Welcome Section */}
-          <div className="mb-8">
+          <div className="max-w-7xl mx-auto px-8 py-8">
 
-            <h1 className="text-4xl font-bold text-white">
-              Welcome Back 👋
-            </h1>
+            {/* Welcome */}
+            <div className="mb-10">
 
-            <p className="text-gray-400 text-lg mt-2">
-              Welcome to your DevPilot AI Dashboard
-            </p>
+              <p className="text-blue-400 font-medium mb-2">
+                👋 Welcome Back
+              </p>
+
+              <h1 className="text-5xl font-bold text-white">
+                Akhil
+              </h1>
+
+              <p className="text-gray-400 text-lg mt-3 max-w-2xl">
+                Manage your AI chats, analyze resumes, generate projects,
+                and track your progress—all from one intelligent dashboard.
+              </p>
+
+            </div>
+
+            {/* Stats */}
+            <StatsCards />
+
+            {/* Projects */}
+            <RecentProjects />
+
+            {/* Quick Tools */}
+            <QuickTools />
+
+            {/* Activity */}
+            <Activity />
 
           </div>
-
-          {/* Stats Cards */}
-          <StatsCards />
-
-          {/* Recent Projects */}
-          <RecentProjects />
-
-          {/* Quick AI Tools */}
-          <QuickTools />
-
-          {/* Activity Feed */}
-          <Activity />
 
         </main>
 

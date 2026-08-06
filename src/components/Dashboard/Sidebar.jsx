@@ -6,87 +6,174 @@ import {
   BarChart3,
   Settings,
   LogOut,
+  Sparkles,
 } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 function Sidebar() {
+  const menuItems = [
+    {
+      name: "Dashboard",
+      icon: <LayoutDashboard size={20} />,
+      path: "/dashboard",
+    },
+    {
+      name: "AI Chat",
+      icon: <MessageSquare size={20} />,
+      path: "/chat",
+    },
+    {
+      name: "Resume Analyzer",
+      icon: <FileText size={20} />,
+      path: "/resume",
+    },
+    {
+      name: "Projects",
+      icon: <FolderKanban size={20} />,
+      path: "#",
+      comingSoon: true,
+    },
+    {
+      name: "Analytics",
+      icon: <BarChart3 size={20} />,
+      path: "#",
+      comingSoon: true,
+    },
+    {
+      name: "Settings",
+      icon: <Settings size={20} />,
+      path: "#",
+      comingSoon: true,
+    },
+  ];
+
   return (
-    <aside className="w-72 min-h-screen bg-[#111827] border-r border-gray-800 flex flex-col">
+    <aside className="w-64 min-h-screen bg-[#0F172A] border-r border-gray-800 flex flex-col justify-between">
 
       {/* Logo */}
-      <div className="px-8 py-8 border-b border-gray-800">
+      <div>
 
-        <h1 className="text-2xl font-bold text-white">
-          DevPilot <span className="text-blue-500">AI</span>
-        </h1>
+        <div className="px-6 py-7 border-b border-gray-800">
 
-        <p className="text-gray-400 text-sm mt-1">
-          AI Developer Platform
-        </p>
+          <div className="flex items-center gap-3">
 
-      </div>
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center shadow-lg">
 
-      {/* Navigation */}
-      <nav className="flex-1 px-5 py-6 space-y-2">
+              <Sparkles className="text-white" size={22} />
 
-        <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600 text-white text-base font-medium">
-          <LayoutDashboard size={20} />
-          Dashboard
-        </button>
+            </div>
 
-        <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 text-base hover:bg-[#1F2937] transition">
-          <MessageSquare size={20} />
-          AI Chat
-        </button>
+            <div>
 
-        <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 text-base hover:bg-[#1F2937] transition">
-          <FileText size={20} />
-          Resume Analyzer
-        </button>
+              <h1 className="text-xl font-bold text-white">
+                DevPilot AI
+              </h1>
 
-        <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 text-base hover:bg-[#1F2937] transition">
-          <FolderKanban size={20} />
-          Projects
-        </button>
+              <p className="text-xs text-green-400">
+                ● Gemini Connected
+              </p>
 
-        <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 text-base hover:bg-[#1F2937] transition">
-          <BarChart3 size={20} />
-          Analytics
-        </button>
-
-        <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-300 text-base hover:bg-[#1F2937] transition">
-          <Settings size={20} />
-          Settings
-        </button>
-
-      </nav>
-
-      {/* User */}
-      <div className="border-t border-gray-800 px-5 py-5">
-
-        <div className="flex items-center gap-3 mb-5">
-
-          <div className="w-11 h-11 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
-            A
-          </div>
-
-          <div>
-
-            <h3 className="text-white text-base font-semibold">
-              Akhil
-            </h3>
-
-            <p className="text-xs text-gray-400">
-              Full Stack Developer
-            </p>
+            </div>
 
           </div>
 
         </div>
 
-        <button className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-red-600 hover:bg-red-700 transition text-white text-base font-medium">
-          <LogOut size={18} />
-          Logout
-        </button>
+        {/* Navigation */}
+
+        <nav className="px-4 py-6 space-y-2">
+
+          {menuItems.map((item, index) => (
+
+            item.comingSoon ? (
+
+              <button
+                key={index}
+                disabled
+                className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-gray-500 cursor-not-allowed"
+              >
+
+                <div className="flex items-center gap-3">
+
+                  {item.icon}
+
+                  <span>{item.name}</span>
+
+                </div>
+
+                <span className="text-[10px] bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded-full">
+                  Soon
+                </span>
+
+              </button>
+
+            ) : (
+
+              <NavLink
+                key={index}
+                to={item.path}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
+                    isActive
+                      ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg"
+                      : "text-gray-300 hover:bg-[#1E293B] hover:text-white"
+                  }`
+                }
+              >
+
+                {item.icon}
+
+                <span className="font-medium">
+                  {item.name}
+                </span>
+
+              </NavLink>
+
+            )
+
+          ))}
+
+        </nav>
+
+      </div>
+
+      {/* Profile */}
+
+      <div className="p-4 border-t border-gray-800">
+
+        <div className="bg-[#111827] rounded-2xl p-4">
+
+          <div className="flex items-center gap-3 mb-4">
+
+            <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-lg">
+
+              A
+
+            </div>
+
+            <div>
+
+              <h3 className="text-white font-semibold">
+                Akhil
+              </h3>
+
+              <p className="text-xs text-gray-400">
+                Full Stack Developer
+              </p>
+
+            </div>
+
+          </div>
+
+          <button className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 py-3 rounded-xl text-white transition">
+
+            <LogOut size={18} />
+
+            Logout
+
+          </button>
+
+        </div>
 
       </div>
 
